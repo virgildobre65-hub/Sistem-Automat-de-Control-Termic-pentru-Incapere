@@ -14,6 +14,7 @@ float Thermistor_GetTemperature(uint16_t adc_value) {
     float resistance = THERMISTOR_R_SERIES /
                        (1023.0f / (float)adc_value - 1.0f);
 
+    /* Ecuația Steinhart-Hart (model B) */
     float steinhart = logf(resistance / THERMISTOR_R_NOMINAL) / THERMISTOR_B_COEFF;
     steinhart += 1.0f / (THERMISTOR_T_NOMINAL + 273.15f);
 
