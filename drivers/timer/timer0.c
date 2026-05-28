@@ -29,7 +29,7 @@ void Timer0_Init(void) {
     // Enable global interrupts
     sei();
 }
-
+ 
 /**
  * @brief Interrupt Service Routine for Timer0 Compare Match A.
  * 
@@ -58,4 +58,19 @@ uint32_t Millis(void) {
     SREG = oldSREG;
     
     return m;
+}
+
+/**
+ * @brief Implements a custom delay with T0
+ * 
+ */
+void DelayT0(uint32_t ms) {
+    if (!(TCCR0B & 0x07)) {
+        Timer0_Init();
+    }
+
+    uint32_t start_time = Millis();
+    while ((Millis() - start_time) < ms) {
+
+    }
 }

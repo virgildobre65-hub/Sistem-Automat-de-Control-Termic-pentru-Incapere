@@ -19,4 +19,9 @@ void Timer0_Init(void);
  */
 uint32_t Millis(void);
 
+/**
+ * @brief Implements a custom delay with T0
+ */
+void DelayT0(uint32_t ms);
+
 #endif // TIMER0_H

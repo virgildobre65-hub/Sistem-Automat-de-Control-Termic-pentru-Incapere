@@ -1,27 +1,29 @@
 #include "thermistor.h"
-
+#include "../../drivers/adc/adc.h"
 #include <math.h>
 
-#include "drivers/adc/adc.h"
-
-float Thermistor_GetTemperature(uint16_t adc_value) {
-    /* Protecție împotriva valorilor ADC invalide */
-    if (adc_value < 10) {
-        return 100.0f; /* Termistor deconectat sau scurtcircuit */
-    }
-
-    /* Calcul rezistență termistor din divizorul de tensiune */
-    float resistance = THERMISTOR_R_SERIES /
-                       (1023.0f / (float)adc_value - 1.0f);
-
-    /* Ecuația Steinhart-Hart (model B) */
-    float steinhart = logf(resistance / THERMISTOR_R_NOMINAL) / THERMISTOR_B_COEFF;
-    steinhart += 1.0f / (THERMISTOR_T_NOMINAL + 273.15f);
-
-    return (1.0f / steinhart) - 273.15f;
-}
+#define THERMISTOR_PIN 0
+#define SERIES_RESISTOR 10000.0f
+#define NOMINAL_RESISTANCE 10000.0f
+#define NOMINAL_TEMPERATURE 25.0f
+#define B_COEFFICIENT 3950.0f
 
 float Thermistor_Read(void) {
-    uint16_t raw = ADC_Read(THERMISTOR_ADC_CHANNEL);
-    return Thermistor_GetTemperature(raw);
+    uint16_t adc_value = ADC_Read(THERMISTOR_PIN);
+    
+    if (adc_value == 0 || adc_value == 1023) {
+        return 25.0f;
+    }
+    
+    float resistance = SERIES_RESISTOR / ((1023.0f / (float)adc_value) - 1.0f);
+    
+    float steinhart;
+    steinhart = resistance / NOMINAL_RESISTANCE;
+    steinhart = log(steinhart);
+    steinhart /= B_COEFFICIENT;
+    steinhart += 1.0f / (NOMINAL_TEMPERATURE + 273.15f);
+    steinhart = 1.0f / steinhart;
+    steinhart -= 273.15f;
+    
+    return steinhart;
 }
