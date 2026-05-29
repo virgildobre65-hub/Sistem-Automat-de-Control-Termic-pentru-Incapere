@@ -1,4 +1,4 @@
-# Sistem-Automat-de-Control-Termic-pentru-Incapere
+# Sistem-Automat-de-Control-Termic-si-iluminare-pentru-Incapere
 
 Acest repository este dedicat dezvoltării unui sistem inteligent automatizat, conceput pentru monitorizarea și gestionarea eficientă a temperaturii într-o încăpere.
 
@@ -22,14 +22,13 @@ Repository-ul conține codul sursă (C), documentația și resursele necesare pe
 
 ## Roadmap
 
-- [ ] Structura de bază și Makefile
-- [ ] GPIO driver
-- [ ] ADC driver
-- [ ] Timer driver
-- [ ] EEPROM driver
-- [ ] Implementare logică Termostat (Control Ventilator & Bec Alarmă)
-- [ ] Adăugare logică de Histerezis (pentru a preveni pornirea/oprirea repetată la oscilații mici de temperatură)
-- [ ] Teste unitare pentru modulul principal de control climatic
+- [x] Structura de bază și Makefile
+- [x] GPIO driver
+- [x] ADC driver
+- [x] Timer driver
+- [x] EEPROM driver
+- [x] Implementare logică Termostat (Control Ventilator & Bec Alarmă)
+- [x] Adăugare logică de Histerezis (pentru a preveni pornirea/oprirea repetată la oscilații mici de temperatură)
 
 ## Structura Proiectului
 
