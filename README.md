@@ -62,10 +62,14 @@ Prin apăsarea butonului hardware conectat la pinul `PD2`, sistemul ciclează pr
 ├── bsp/            
 ├── drivers/        
 │   ├── adc/
+│   └──alarm/
+│   └──buton/
 │   ├── eeprom/
+│   └──fam/
 │   ├── gpio/
 │   ├── interrupt/
 │   ├── pwm/
+│   └──thermistor/
 │   ├── timer/
 │   └── usart/
 ├── src/            
